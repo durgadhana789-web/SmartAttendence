@@ -1,3 +1,6 @@
+from flask import Flask, render_template
+
+app = Flask(__name__)
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
@@ -34,6 +37,9 @@ def create_tables():
             s = Student(student_id='STU123', name='John Doe', password_hash=hashed_pw)
             db.session.add(s)
             db.session.commit()
+@app.route("/")
+def home():
+    return "Hello, this is Smart Attendance!"
 # Home page with login options
 @app.route('/')
 def home():
@@ -166,3 +172,5 @@ def logout():
 if __name__ == '__main__':
     create_tables()
     app.run(host='0.0.0.0', port=5000, debug=True)
+if __name__ == "__main__":
+    app.run(debug=True)
